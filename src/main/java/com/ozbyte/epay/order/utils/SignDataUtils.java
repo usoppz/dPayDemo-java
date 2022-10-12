@@ -32,7 +32,7 @@ public class SignDataUtils {
      */
     public static String getOrderRespSignData(SignOrderDTO req) {
         return req.getOrderNo() + req.getAmount() + req.getTradeAmt() + req.getCurrency() + req.getSymbol()
-                + req.getUsefulTime() + req.getAddress() + req.getImageStr() + req.getCashierUrl();
+                + req.getUsefulTime() + req.getAddress() + req.getQrcodeUrl() + req.getCashierUrl();
     }
 
     /**

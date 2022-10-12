@@ -53,7 +53,7 @@ public class SignOrderDTO {
     /**
      * 订单收款码，图片base64字符串格式
      */
-    private String imageStr;
+    private String qrcodeUrl;
 
     /**
      * 官方收银台地址
