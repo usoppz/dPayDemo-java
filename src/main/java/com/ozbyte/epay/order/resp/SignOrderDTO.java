@@ -43,7 +43,7 @@ public class SignOrderDTO {
     /**
      * 订单有效时间
      */
-    private Date usefulTime;
+    private Long usefulTime;
 
     /**
      * 订单收款地址

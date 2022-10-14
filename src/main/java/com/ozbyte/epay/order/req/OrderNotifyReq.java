@@ -2,8 +2,6 @@ package com.ozbyte.epay.order.req;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * 订单支付成功通知参数
  *
@@ -27,12 +25,12 @@ public class OrderNotifyReq {
     /**
      * 订单金额不能为空,精确到小数点后4位
      */
-    private BigDecimal amount;
+    private Double amount;
 
     /**
      * 实际交易金额
      */
-    private BigDecimal tradeAmt;
+    private Double tradeAmt;
 
     /**
      * 主网协议，目前只支持TRC20。
@@ -50,33 +48,13 @@ public class OrderNotifyReq {
     private String symbol;
 
     /**
-     * 商户端用户编号
+     * 交易Hash
      */
-    private String customerNo;
-
-    /**
-     * 商品名称
-     */
-    private String productName;
-
-    /**
-     * 页面调转地址
-     */
-    private String returnUrl;
-
-    /**
-     * 通知回调地址
-     */
-    private String notifyUrl;
+    private String hash;
 
     /**
      * 签名串
      */
     private String signature;
-
-    /**
-     * 平台公钥
-     */
-    private String publicKey;
 
 }

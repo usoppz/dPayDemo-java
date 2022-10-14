@@ -15,7 +15,7 @@ public class PayOrderReq {
     /**
      * 公钥
      */
-    private String publicKey;
+    private String appId;
 
     /**
      * 商户订单编号

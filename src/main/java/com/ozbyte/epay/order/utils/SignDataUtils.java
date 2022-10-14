@@ -20,7 +20,7 @@ public class SignDataUtils {
      * @return sign data
      */
     public static String getOrderSignData(PayOrderReq req) {
-        return req.getOrderNo() + req.getAmount() + req.getNetwork() + req.getSymbol() + req.getCurrency()
+        return req.getAppId() + req.getOrderNo() + req.getAmount() + req.getNetwork() + req.getSymbol() + req.getCurrency()
                 + req.getReturnUrl() + req.getNotifyUrl() + req.getCustomerNo() + req.getProductName();
     }
 
@@ -42,8 +42,7 @@ public class SignDataUtils {
      */
     public static String getOrderNotifySignData(OrderNotifyReq req) {
         return req.getPlatformOrderNo() + req.getMerchantOrderNo() + req.getAmount() + req.getTradeAmt()
-                + req.getNetwork() + req.getSymbol() + req.getCurrency() + req.getReturnUrl()
-                + req.getNotifyUrl() + req.getCustomerNo() + req.getProductName();
+                + req.getNetwork() + req.getSymbol() + req.getCurrency() + req.getHash();
     }
 
 }

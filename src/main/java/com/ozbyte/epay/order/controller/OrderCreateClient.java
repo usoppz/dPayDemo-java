@@ -33,20 +33,20 @@ public class OrderCreateClient {
 
     private static PayOrderReq getOrderReq() {
         PayOrderReq req = new PayOrderReq();
-        req.setOrderNo("PO1234556778WD8GD0SD88879BBB");
-        req.setAmount(1.00);
-        req.setCurrency("usd");
+        req.setAppId(ConfigSingleton.getInstance().getAppId());
+        req.setOrderNo("PO1234556778WD8GD0SD99979BEF");
+        req.setAmount(50.00);
+        req.setCurrency("cny");
         req.setSymbol("usdt");
         req.setNetwork("trc20");
-        req.setCustomerNo("account no.");
-        req.setProductName("product name");
-        req.setReturnUrl("http://www.baidu.com");
+        req.setCustomerNo("test00001");
+        req.setProductName("product test name");
+        req.setReturnUrl("http://127.0.0.1:8089/v1/order/returnUrl");
         req.setNotifyUrl("http://127.0.0.1:8089/v1/order/notifyUrl");
         String signData = SignDataUtils.getOrderSignData(req);
         System.out.println("signData: " + signData);
         String signature = SignUtils.sign(signData);
         req.setSignature(signature);
-        req.setPublicKey(ConfigSingleton.getInstance().getPublicKey());
         return req;
     }
 
@@ -55,7 +55,8 @@ public class OrderCreateClient {
         SignOrderDTO data = JSON.parseObject(String.valueOf(resp.getJSONObject("data")), SignOrderDTO.class);
         if (200 == resp.getInteger("code") && null != data) {
             String respSignData = SignDataUtils.getOrderRespSignData(data);
-            if (SignUtils.verify(respSignData, data.getSignature(), data.getPublicKey())) {
+            System.out.println("The current respOrderSignData : " + respSignData);
+            if (SignUtils.verify(respSignData, data.getSignature())) {
                 System.out.println("数据有效");
             }else {
                 System.out.println("数据无效，请谨慎使用");

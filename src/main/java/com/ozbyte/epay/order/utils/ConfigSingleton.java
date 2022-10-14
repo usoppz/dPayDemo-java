@@ -22,11 +22,16 @@ public class ConfigSingleton extends Setting {
     }
 
     public String getPublicKey() {
-        return get("rsaPublicKey");
+        return get("dPayRsaPublicKey");
     }
 
     public String getPrivateKey() {
         return get("rsaPrivateKey");
     }
+
+    public String getAppId() {
+        return get("appId");
+    }
+
 
 }
