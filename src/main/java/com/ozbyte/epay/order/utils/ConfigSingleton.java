@@ -21,10 +21,18 @@ public class ConfigSingleton extends Setting {
         return CONFIG;
     }
 
+    /**
+     * 获取官方平台公钥
+     * @return 平台公钥
+     */
     public String getPublicKey() {
         return get("dPayRsaPublicKey");
     }
 
+    /**
+     * 获取商户私钥
+     * @return 商户私钥
+     */
     public String getPrivateKey() {
         return get("rsaPrivateKey");
     }

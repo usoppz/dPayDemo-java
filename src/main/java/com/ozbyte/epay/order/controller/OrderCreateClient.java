@@ -1,12 +1,11 @@
 package com.ozbyte.epay.order.controller;
 
-import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.ozbyte.epay.order.req.PayOrderReq;
+import com.ozbyte.epay.order.resp.Result;
 import com.ozbyte.epay.order.resp.SignOrderDTO;
 import com.ozbyte.epay.order.utils.ConfigSingleton;
+import com.ozbyte.epay.order.utils.InterfaceUtil;
 import com.ozbyte.epay.order.utils.SignDataUtils;
 import com.ozbyte.epay.order.utils.SignUtils;
 
@@ -22,13 +21,15 @@ public class OrderCreateClient {
     public static void main(String[] args) {
 
         PayOrderReq req = getOrderReq();
-        String json = JSONUtil.parseObj(req).toStringPretty();
-        System.out.println("请求参数：" + json);
-        String result = HttpUtil.post(ConfigSingleton.getInstance().get("orderCreateUrl"), json);
-        System.out.println("响应参数：" + JSONUtil.parseObj(result).toStringPretty());
-
+        Result<SignOrderDTO> resp = InterfaceUtil.invoke(req,ConfigSingleton.getInstance().get("orderCreateUrl"), new TypeReference<SignOrderDTO>() {});
+        if(null == resp.getData()){
+            System.out.println(" result's data is null. code:"+ resp.getCode()+ " message:"+ resp.getMsg());
+            return;
+        }
+        String respSignData = SignDataUtils.getOrderRespSignData(resp.getData());
+        System.out.println("The current respOrderSignData : " + respSignData);
         //响应数据有效验证
-        verifyResp(result);
+        InterfaceUtil.verifyResp(respSignData, resp.getData().getSignature());
     }
 
     private static PayOrderReq getOrderReq() {
@@ -50,17 +51,4 @@ public class OrderCreateClient {
         return req;
     }
 
-    private static void verifyResp(String result) {
-        JSONObject resp = JSON.parseObject(result);
-        SignOrderDTO data = JSON.parseObject(String.valueOf(resp.getJSONObject("data")), SignOrderDTO.class);
-        if (200 == resp.getInteger("code") && null != data) {
-            String respSignData = SignDataUtils.getOrderRespSignData(data);
-            System.out.println("The current respOrderSignData : " + respSignData);
-            if (SignUtils.verify(respSignData, data.getSignature())) {
-                System.out.println("数据有效");
-            }else {
-                System.out.println("数据无效，请谨慎使用");
-            }
-        }
-    }
 }
