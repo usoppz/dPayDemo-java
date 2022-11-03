@@ -33,9 +33,9 @@ public class AddressClient {
         //3.disable or enable address
 //        disableAddress(ConfigSingleton.getInstance().get("addressDisabledUrl"));
         //4.config address
-//        configAddress(ConfigSingleton.getInstance().get("addressConfigUrl"));
+        configAddress(ConfigSingleton.getInstance().get("addressConfigUrl"));
         //5.list address
-        listAddress(ConfigSingleton.getInstance().get("addressListUrl"));
+//        listAddress(ConfigSingleton.getInstance().get("addressListUrl"));
 
     }
 
@@ -67,8 +67,8 @@ public class AddressClient {
     private static void disableAddress(String url) {
         AddressDisabledApiReq req = new AddressDisabledApiReq();
         req.setAppId(ConfigSingleton.getInstance().getAppId());
-        req.setAddress("TAfJbSj3BWv1p4F4ykAFCYtrY6ZiycEruA");
-        req.setStatus((byte) 1);
+        req.setAddress("TXLu3EyYZC3tfMWGZmt58iRvmVwuer2Bix");
+        req.setStatus((byte) 2);
         String signData = req.getAppId() + req.getAddress() + req.getStatus();
         req.setSignature(SignUtils.sign(signData));
         Result<Object> resp = InterfaceUtil.invoke(req, url, null);
@@ -80,7 +80,7 @@ public class AddressClient {
         AddressAddApiReq req = new AddressAddApiReq();
         req.setAppId(ConfigSingleton.getInstance().getAppId());
         req.setNetwork("trc20");
-        req.setAddress("TCpznirJYaqcRDs3qsESAU9YWt31Sv4CLB");
+        req.setAddress("TW4FVhVqxeCUUZXM2aWKK62YJGNpqrfgGE");
         String signData = req.getAppId() + req.getAddress() + req.getNetwork();
         String signature = SignUtils.sign(signData);
         req.setSignature(signature);

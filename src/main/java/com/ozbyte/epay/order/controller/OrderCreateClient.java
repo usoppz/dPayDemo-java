@@ -35,8 +35,8 @@ public class OrderCreateClient {
     private static PayOrderReq getOrderReq() {
         PayOrderReq req = new PayOrderReq();
         req.setAppId(ConfigSingleton.getInstance().getAppId());
-        req.setOrderNo("PO1234556778WD8GD0SD99979BEF");
-        req.setAmount(50.00);
+        req.setOrderNo("PO1234556778WD8GD0SD888879BEF");
+        req.setAmount(10.00);
         req.setCurrency("cny");
         req.setSymbol("usdt");
         req.setNetwork("trc20");
