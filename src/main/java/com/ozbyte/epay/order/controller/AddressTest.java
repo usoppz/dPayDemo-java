@@ -21,11 +21,11 @@ import java.util.List;
 public class AddressTest {
 
     public static void main(String[] args) {
-        generateAddress();
+//        generateAddress();
 //        addressGenerateAndConfig();
 //        disableAddress();
 //        configAddress();
-//        listAddress();
+        listAddress();
     }
 
     /**

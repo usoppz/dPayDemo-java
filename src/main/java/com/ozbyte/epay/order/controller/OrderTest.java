@@ -24,8 +24,8 @@ public class OrderTest {
      */
     private static PayOrderReq getOrderReq() {
         PayOrderReq req = new PayOrderReq();
-        req.setOrderNo("PO123455678WD8GD0SD6668879BEF");
-        req.setAmount(50.00);
+        req.setOrderNo("PO123455678WD8GD0SD9999979BEF");
+        req.setAmount(100.00);
         req.setCurrency("cny");
         req.setSymbol("usdt");
         req.setOrderType(2);
